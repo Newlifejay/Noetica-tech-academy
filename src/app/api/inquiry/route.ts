@@ -1,7 +1,4 @@
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
 
 export async function POST(req: Request) {
   try {
@@ -12,21 +9,7 @@ export async function POST(req: Request) {
     const course = formData.get('course') as string || ''
     const experience = formData.get('experience') as string || ''
 
-    // Insert lead into Database safely
-    try {
-      await prisma.inquiry.create({
-        data: {
-          name,
-          email,
-          phone,
-          course,
-          experience
-        }
-      });
-      console.log("LEAD SAVED TO DATABASE:", { name, email });
-    } catch (dbError) {
-      console.error("Database connection not configured yet in Azure:", dbError);
-    }
+    console.log("NEW LEAD RECEIVED:", { name, email, phone, course, experience });
 
     const emailBody = `
       Hello, my name is ${name}. I am interested in enrolling in the ${course} program at Noetica-Tech Academy. I would like to receive more information about the course structure, schedule, and enrollment process.
