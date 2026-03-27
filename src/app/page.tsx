@@ -1,45 +1,63 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowRight, Code, Shield, BrainCircuit, LineChart, Globe, CheckCircle2 } from "lucide-react"
+import { ArrowRight, Code, Shield, BrainCircuit, LineChart, Globe, CheckCircle2, Cloud, Palette } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-start pb-24">
       {/* Hero Section */}
-      <section className="relative w-full py-32 px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center overflow-hidden">
-        {/* Glow Effects */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/20 blur-[120px] rounded-full pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[300px] bg-neon-blue/20 blur-[120px] rounded-full pointer-events-none" />
+      <section className="relative w-full min-h-[90vh] flex items-center pt-24 pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-slate-900">
+        {/* Background Image */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <Image 
+            src="/banner.png" 
+            alt="Students learning at Noetica-Tech Academy" 
+            fill 
+            className="object-cover object-right opacity-60 mix-blend-overlay"
+            priority 
+          />
+        </div>
         
-        <div className="z-10 max-w-4xl max-auto space-y-8 tracking-tight">
-          <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-1.5 text-sm font-medium text-slate-700">
-            <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse mr-2" />
-            Admissions Open for 2026 Batch
+        {/* Gradients for text legibility and fading out */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-transparent z-0" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-slate-50 to-transparent z-0" />
+
+        <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="space-y-8 tracking-tight text-left pt-12 md:pt-0">
+            <div className="inline-flex items-center rounded-full border border-slate-700 bg-slate-800/50 backdrop-blur-md px-4 py-1.5 text-sm font-medium text-white shadow-xl">
+              <span className="flex h-2 w-2 rounded-full bg-neon-blue animate-pulse mr-2 shadow-[0_0_10px_#00f0ff]" />
+              Admissions Open for 2026 Batch
+            </div>
+            
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-white leading-tight">
+              Accelerate Your Tech Career. <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-primary drop-shadow-lg text-glow">Build Real-World Solutions.</span>
+            </h1>
+            
+            <p className="max-w-xl text-lg sm:text-xl text-slate-300 leading-relaxed font-light">
+              Join Noetica-Tech Academy to gain job-ready digital skills, build enterprise-grade projects, and connect with global career opportunities.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row items-start justify-start gap-4 pt-4">
+              <Link href="/courses" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full h-14 px-8 text-lg group bg-primary hover:bg-primary/90 text-white border-0 shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all overflow-hidden relative">
+                  <div className="absolute inset-0 bg-white/20 -skew-x-[30deg] -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 pointer-events-none" />
+                  Explore Courses
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+              <Link href="/roadmap" className="w-full sm:w-auto">
+                <Button variant="outline" size="lg" className="w-full h-14 px-8 text-lg border-slate-600 text-white hover:bg-white hover:text-slate-900 transition-colors backdrop-blur-sm bg-black/20">
+                  Get Free Career Roadmap
+                </Button>
+              </Link>
+            </div>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-slate-900">
-            Accelerate Your Tech Career. <br className="hidden md:block"/>
-            <span className="text-glow text-primary">Build Real-World Solutions.</span>
-          </h1>
-          
-          <p className="max-w-2xl mx-auto text-xl text-slate-600">
-            Join Noetica-Tech Academy to gain job-ready digital skills, build enterprise-grade projects, and connect with global career opportunities.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Link href="/courses">
-              <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-lg group">
-                Explore Courses
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-            <Link href="/roadmap">
-              <Button variant="outline" size="lg" className="w-full sm:w-auto h-14 px-8 text-lg glass text-slate-900 hover:text-slate-900 hover:bg-slate-100">
-                Get Free Career Roadmap
-              </Button>
-            </Link>
-          </div>
+          {/* Empty spacer to align people on the right on larger screens */}
+          <div className="hidden lg:block relative h-[600px] w-full pointer-events-none" />
         </div>
       </section>
 
@@ -156,6 +174,69 @@ export default function Home() {
               </CardContent>
               <CardFooter className="relative z-10">
                 <Link href="/courses/data-analysis" className="w-full">
+                  <Button className="w-full">Enroll Now</Button>
+                </Link>
+              </CardFooter>
+            </Card>
+
+            {/* Cybersecurity */}
+            <Card className="relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <CardHeader>
+                <Shield className="h-8 w-8 text-red-500 mb-4" />
+                <CardTitle>Cybersecurity & Ethical Hacking</CardTitle>
+                <CardDescription>Learn to secure networks, defend against cyber threats, and perform penetration testing safely.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm text-slate-700">
+                  <li className="flex items-center"><CheckCircle2 className="h-4 w-4 mr-2 text-primary" /> Network Security</li>
+                  <li className="flex items-center"><CheckCircle2 className="h-4 w-4 mr-2 text-primary" /> Ethical Hacking</li>
+                </ul>
+              </CardContent>
+              <CardFooter className="relative z-10">
+                <Link href="/courses/cybersecurity" className="w-full">
+                  <Button className="w-full">Enroll Now</Button>
+                </Link>
+              </CardFooter>
+            </Card>
+
+            {/* Cloud Computing */}
+            <Card className="relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-sky-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <CardHeader>
+                <Cloud className="h-8 w-8 text-sky-500 mb-4" />
+                <CardTitle>Cloud Computing & DevOps</CardTitle>
+                <CardDescription>Master Azure, AWS, Docker, and Kubernetes to deploy and scale enterprise applications.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm text-slate-700">
+                  <li className="flex items-center"><CheckCircle2 className="h-4 w-4 mr-2 text-primary" /> Cloud Architecture</li>
+                  <li className="flex items-center"><CheckCircle2 className="h-4 w-4 mr-2 text-primary" /> CI/CD Pipelines</li>
+                </ul>
+              </CardContent>
+              <CardFooter className="relative z-10">
+                <Link href="/courses/cloud-computing" className="w-full">
+                  <Button className="w-full">Enroll Now</Button>
+                </Link>
+              </CardFooter>
+            </Card>
+
+            {/* UI/UX Design */}
+            <Card className="relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <CardHeader>
+                <Palette className="h-8 w-8 text-purple-500 mb-4" />
+                <CardTitle>UI/UX & Product Design</CardTitle>
+                <CardDescription>Design intuitive and engaging user experiences using Figma, wireframing, and interactive prototyping.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm text-slate-700">
+                  <li className="flex items-center"><CheckCircle2 className="h-4 w-4 mr-2 text-primary" /> User Research</li>
+                  <li className="flex items-center"><CheckCircle2 className="h-4 w-4 mr-2 text-primary" /> Interactive Prototyping</li>
+                </ul>
+              </CardContent>
+              <CardFooter className="relative z-10">
+                <Link href="/courses/ui-ux-design" className="w-full">
                   <Button className="w-full">Enroll Now</Button>
                 </Link>
               </CardFooter>
