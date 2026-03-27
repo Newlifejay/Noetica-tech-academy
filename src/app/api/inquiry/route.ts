@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server'
-import nodemailer from 'nodemailer'
 import { prisma } from '@/lib/prisma'
 
 export async function POST(req: Request) {
@@ -35,19 +34,8 @@ export async function POST(req: Request) {
       Experience Level: ${experience}
     `;
 
-    if (process.env.SMTP_URL) {
-      const transporter = nodemailer.createTransport(process.env.SMTP_URL);
-      await transporter.sendMail({
-        from: '"Noetica-Tech Forms" <noreply@noetica-tech.com.ng>',
-        to: 'support@noetica-tech.com.ng',
-        subject: `New Inquiry from ${name} for ${course}`,
-        text: emailBody,
-      });
-      console.log("AUTOMATED EMAIL ACTUALLY DISPATCHED TO support@noetica-tech.com.ng");
-    } else {
-      console.log("AUTOMATED EMAIL OUTGOING TO support@noetica-tech.com.ng:", emailBody);
-      console.log("Note: nodemailer not configured. Set SMTP_URL to send real emails.");
-    }
+    // Note: To actually send emails later, you can add an API integration like Resend or SendGrid here.
+    console.log("AUTOMATED EMAIL NOTIFICATION TO support@noetica-tech.com.ng:", emailBody);
 
     return NextResponse.redirect(new URL('/success', req.url))
   } catch (error) {
