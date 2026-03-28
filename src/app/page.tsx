@@ -3,10 +3,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { ArrowRight, Code, Shield, BrainCircuit, LineChart, Globe, CheckCircle2, Cloud, Palette } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { TestimonialsSlider } from "@/components/ui/TestimonialsSlider"
+
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start pb-24">
+    <main className="flex min-h-screen flex-col items-center justify-start">
       {/* Hero Section */}
       <section className="relative w-full min-h-[90vh] flex items-center pt-24 pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-slate-900">
         {/* Background Image */}
@@ -33,7 +35,7 @@ export default function Home() {
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-white leading-tight">
               Accelerate Your Tech Career. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-primary drop-shadow-lg text-glow">Build Real-World Solutions.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-primary drop-shadow-lg text-glow">Build Real-World Solutions.</span>
             </h1>
             
             <p className="max-w-xl text-lg sm:text-xl text-slate-300 leading-relaxed font-light">
@@ -258,6 +260,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+      
+      <TestimonialsSlider />
     </main>
   );
 }
