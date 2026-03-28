@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Globe, Mail, MapPin, Phone } from 'lucide-react';
 
-export function Footer() {
+export function SiteFooter() {
   return (
     <footer className="w-full bg-slate-900 text-slate-300 py-12 px-4 sm:px-6 lg:px-8 mt-auto">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">

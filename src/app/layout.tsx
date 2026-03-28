@@ -4,7 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/ui/navbar";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { AIChatWidget } from "@/components/ui/AIChatWidget";
-import { Footer } from "@/components/ui/footer";
+import { SiteFooter } from "@/components/ui/SiteFooter";
 
 const outfit = Outfit({
   variable: "--font-sans",
@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-slate-50 text-foreground items-stretch relative overflow-x-hidden w-full m-0 p-0" suppressHydrationWarning>
         <Navbar />
         {children}
-        <Footer />
+        <SiteFooter />
         <WhatsAppButton />
         <AIChatWidget />
       </body>
