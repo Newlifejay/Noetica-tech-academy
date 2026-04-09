@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import nodemailer from 'nodemailer'
+import { sendEmail } from '@/lib/email'
 
 export async function POST(req: Request) {
   try {
@@ -37,31 +37,15 @@ export async function POST(req: Request) {
       Experience Level: ${experience}
     `;
 
-    // Configure Nodemailer Transporter
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.gmail.com', // fallback to gmail
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-
-    // We only try to send if SMTP setup is provided
-    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
-      const mailOptions = {
-        from: process.env.SMTP_FROM || process.env.SMTP_USER,
-        to: 'support@noetica-tech.com.ng',
-        subject: `New Enrollment Inquiry: ${course} - ${name}`,
-        text: emailBody,
-        replyTo: email,
-      };
-
-      await transporter.sendMail(mailOptions);
-      console.log("Automated email sent to support@noetica-tech.com.ng");
+    if (process.env.MS_CLIENT_ID && process.env.MS_CLIENT_SECRET && process.env.MS_TENANT_ID && process.env.MS_EMAIL_FROM) {
+      try {
+        await sendEmail('support@noetica-tech.com.ng', `New Enrollment Inquiry: ${course} - ${name}`, emailBody);
+        console.log("Automated email sent to support@noetica-tech.com.ng via MS Graph API");
+      } catch (emailError) {
+        console.error("MS Graph email failed, skipping.", emailError);
+      }
     } else {
-      console.log("SMTP not configured. Skipping email delivery.");
+      console.log("MS Graph OAuth not configured. Skipping email delivery.");
     }
 
     return NextResponse.redirect(new URL('/success', req.url))
