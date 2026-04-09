@@ -48,7 +48,7 @@ export async function POST(req: Request) {
       console.log("MS Graph OAuth not configured. Skipping email delivery.");
     }
 
-    return NextResponse.redirect(new URL('/success', req.url))
+    return NextResponse.redirect(new URL('/success', req.url), 303)
   } catch (error) {
     console.error("Error processing inquiry:", error);
     return NextResponse.json({ error: 'Failed to process inquiry' }, { status: 500 })
